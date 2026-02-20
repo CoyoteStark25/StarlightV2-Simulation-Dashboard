@@ -1,12 +1,15 @@
-import { useState } from 'react';
 import { Volume2, VolumeX, Play } from 'lucide-react';
 import { ACCENTS } from '../constants';
 
-export default function AccentSection() {
-  const [accent, setAccent] = useState(ACCENTS[0]);
-  const [volume, setVolume] = useState(70);
-  const [mute, setMute] = useState(false);
-
+export default function AccentSection({
+  selectedAccent,
+  onAccentChange,
+  accentVolume,
+  onAccentVolumeChange,
+  accentMute,
+  onAccentMuteChange,
+  onPreviewHelp,
+}) {
   return (
     <section
       className="rounded-xl bg-milk-warm border border-stone-200 p-6 shadow-sm"
@@ -27,8 +30,8 @@ export default function AccentSection() {
               type="radio"
               name="accent"
               value={a}
-              checked={accent === a}
-              onChange={() => setAccent(a)}
+              checked={selectedAccent === a}
+              onChange={() => onAccentChange(a)}
               className="w-4 h-4 text-starlight-orange border-stone-300 focus:ring-starlight-orange"
             />
             <span className="text-stone-700 group-hover:text-stone-900">{a}</span>
@@ -46,26 +49,27 @@ export default function AccentSection() {
           type="range"
           min="0"
           max="100"
-          value={mute ? 0 : volume}
-          onChange={(e) => setVolume(Number(e.target.value))}
-          disabled={mute}
+          value={accentMute ? 0 : accentVolume}
+          onChange={(e) => onAccentVolumeChange(Number(e.target.value))}
+          disabled={accentMute}
           aria-label="Accent volume"
           className="flex-1 min-w-[100px] h-2 rounded-lg appearance-none bg-stone-200 cursor-pointer disabled:opacity-50"
         />
         <button
           type="button"
-          onClick={() => setMute(!mute)}
-          aria-pressed={mute}
-          aria-label={mute ? 'Unmute accent' : 'Mute accent'}
+          onClick={() => onAccentMuteChange(!accentMute)}
+          aria-pressed={accentMute}
+          aria-label={accentMute ? 'Unmute accent' : 'Mute accent'}
           className="min-h-touch min-w-touch inline-flex items-center justify-center rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm font-medium text-stone-700 hover:bg-stone-50 focus:ring-2 focus:ring-starlight-orange focus:ring-offset-2"
         >
-          {mute ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
+          {accentMute ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
           <span className="ml-1.5">Mute</span>
         </button>
       </div>
 
       <button
         type="button"
+        onClick={onPreviewHelp}
         className="min-h-[48px] min-w-touch inline-flex items-center justify-center gap-2 rounded-lg bg-starlight-green px-6 py-3 text-base font-semibold text-white hover:opacity-90 focus:ring-2 focus:ring-starlight-green focus:ring-offset-2"
         aria-label="Preview Help"
       >
