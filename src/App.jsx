@@ -2,7 +2,7 @@ import { useState, useRef, useCallback, useEffect } from 'react';
 import AccentSection from './components/AccentSection';
 import NoiseSection from './components/NoiseSection';
 import ControlPanel from './components/ControlPanel';
-import { ACCENTS, getAccentSlug } from './constants';
+import { ACCENTS, getAccentSlug, ACCENT_AUDIO_FILES } from './constants';
 
 function App() {
   const [selectedAccent, setSelectedAccent] = useState(ACCENTS[0]);
@@ -32,8 +32,8 @@ function App() {
     const accentAudio = accentAudioRef.current;
     const noiseAudio = noiseAudioRef.current;
 
-    const slug = getAccentSlug(selectedAccent);
-    accentAudio.src = `/audio/accents/${slug}.mp3`;
+    const filename = ACCENT_AUDIO_FILES[selectedAccent] ?? `${getAccentSlug(selectedAccent)}.mp3`;
+    accentAudio.src = `/audio/accents/${filename}`;
     accentAudio.volume = accentMute ? 0 : accentVolume / 100;
     accentAudio.currentTime = 0;
     accentAudio.play().catch(() => {});

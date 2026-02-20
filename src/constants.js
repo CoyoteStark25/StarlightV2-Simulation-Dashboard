@@ -2,9 +2,6 @@ export const ACCENTS = [
   'Received Pronunciation (RP)',
   'Cockney',
   'Geordie',
-  'Scouse',
-  'Brummie',
-  'West Country',
   'Scottish',
   'Welsh',
   'Northern Irish',
@@ -18,6 +15,12 @@ export function getAccentSlug(accentName) {
     .replace(/[()']/g, '')
     .replace(/&/g, 'and');
 }
+
+/** Optional map: accent display name → audio filename (no path). Overrides slug when set. */
+export const ACCENT_AUDIO_FILES = {
+  'Received Pronunciation (RP)': 'ReceivedPronunciation.mp3',
+  'Northern Irish': 'NorthernIrish.mp3',
+};
 
 export const NOISE_ENVIRONMENTS = [
   { id: 'traffic', label: 'Traffic & Roadside', icon: 'Car' },

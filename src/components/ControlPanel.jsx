@@ -47,7 +47,7 @@ export default function ControlPanel({
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center gap-4">
+        <div className="flex flex-col items-center justify-center gap-2">
           <div className="flex items-center gap-2">
             <button
               type="button"
@@ -66,12 +66,6 @@ export default function ControlPanel({
               <Square className="w-5 h-5" fill="currentColor" />
             </button>
           </div>
-          <button
-            type="button"
-            className="min-h-[52px] min-w-[160px] inline-flex items-center justify-center gap-2 rounded-lg bg-starlight-orange px-8 py-3 text-lg font-semibold text-white hover:bg-starlight-orange-dark focus:ring-2 focus:ring-starlight-orange focus:ring-offset-2"
-          >
-            Run Test
-          </button>
         </div>
 
         <div className="flex-1 space-y-3">
